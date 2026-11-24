@@ -13,12 +13,19 @@ function Header() {
           <Link to="/om-oss">Om oss</Link>
           <Link to="/#tjanster">Vad vi gör</Link>
           <Link to="/galleri">Galleri</Link>
+          <Link to="/kontakt" className="header__contact-button">
+            Kontakta oss
+          </Link>
         </nav>
 
         <div className="header__contact">
-          <Link to="/#kontakt" className="header__contact-link">
-            Kontakta oss
-          </Link>
+          <a href="tel:018100180">
+            <strong>018-100 180</strong>
+          </a>
+
+          <a href="mailto:info@arossnickeri.se">
+            <strong>info@arossnickeri.se</strong>
+          </a>
         </div>
       </div>
     </header>

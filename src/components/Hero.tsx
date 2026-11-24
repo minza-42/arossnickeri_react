@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Hero() {
   return (
     <section className="hero">
@@ -12,9 +14,9 @@ function Hero() {
               Måttanpassade snickerilösningar med kvalitet och hantverk i fokus.
             </p>
 
-            <a href="#kontakt" className="hero__button">
+            <Link to="/kontakt" className="hero__button">
               Kontakta oss
-            </a>
+            </Link>
           </div>
         </div>
       </div>

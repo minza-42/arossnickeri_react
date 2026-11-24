@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import AboutPage from "./pages/AboutPage";
 import GalleryPage from "./pages/GalleryPage";
 import NotFound from "./pages/NotFound";
+import ContactPage from "./pages/ContactPage";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/om-oss" element={<AboutPage />} />
         <Route path="/galleri" element={<GalleryPage />} />
+        <Route path="/kontakt" element={<ContactPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
