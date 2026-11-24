@@ -1,58 +1,58 @@
-const galleryItems = [
+import wineCellar from "../assets/images/gallery/wine-cellar.webp";
+import staircase from "../assets/images/gallery/staircase.webp";
+import barInterior from "../assets/images/gallery/bar-interior.webp";
+import bookshelf from "../assets/images/gallery/bookshelf.webp";
+import customSeating from "../assets/images/gallery/custom-seating.webp";
+
+const galleryImages = [
   {
-    image: "specialbyggda-mobler.webp",
-    title: "Specialbyggda möbler",
-    category: "Specialsnickeri",
+    image: wineCellar,
+    title: "Vinkällare",
+    description: "Platsbyggd vinkällare med specialanpassad förvaring.",
   },
   {
-    image: "offentliga-miljö.webp",
-    title: "Offentliga miljöer",
-    category: "Inredning",
+    image: staircase,
+    title: "Trappa",
+    description: "Specialbyggd trappa med klassiska detaljer.",
   },
   {
-    image: "bokhylla-header.webp",
-    title: "Platsbyggda bokhyllor",
-    category: "Specialsnickeri",
+    image: barInterior,
+    title: "Barinredning",
+    description: "Specialtillverkad barinredning för offentlig miljö.",
   },
   {
-    image: "trappor_header.webp",
-    title: "Inomhustrappor",
-    category: "Byggnadssnickeri",
+    image: bookshelf,
+    title: "Platsbyggd bokhylla",
+    description: "Måttanpassad bokhylla med integrerade skåp.",
+  },
+  {
+    image: customSeating,
+    title: "Specialinredning",
+    description: "Specialbyggd sitt- och trappinredning.",
   },
 ];
 
 function Gallery() {
   return (
-    <section className="gallery" id="referenser">
-      <div className="container">
-        <div className="gallery__intro">
-          <p className="gallery__eyebrow">Våra arbeten</p>
+    <section className="gallery">
+      <div className="gallery__header">
+        <h1>Våra arbeten</h1>
+        <p>Här kan du se ett urval av våra specialsnickerier och projekt.</p>
+      </div>
 
-          <h2>Utvalda arbeten.</h2>
+      <div className="gallery__grid">
+        {galleryImages.map((item) => (
+          <article className="gallery-card" key={item.title}>
+            <div className="gallery-card__image">
+              <img src={item.image} alt={item.title} />
+            </div>
 
-          <p className="gallery__description">
-            Ett urval av snickerier och inredningar skapade med fokus på
-            kvalitet och detaljer.
-          </p>
-        </div>
-
-        <div className="gallery__grid">
-          {galleryItems.map((item) => (
-            <article className="gallery-card" key={item.image}>
-              <div className="gallery-card__image">
-                <img
-                  src={`/src/assets/images/${item.image}`}
-                  alt={item.title}
-                />
-              </div>
-
-              <div className="gallery-card__content">
-                <p>{item.category}</p>
-                <h3>{item.title}</h3>
-              </div>
-            </article>
-          ))}
-        </div>
+            <div className="gallery-card__content">
+              <h2>{item.title}</h2>
+              <p>{item.description}</p>
+            </div>
+          </article>
+        ))}
       </div>
     </section>
   );
