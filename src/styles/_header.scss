@@ -1,0 +1,56 @@
+
+@use "./variables" as *;
+
+.header {
+  background: $color-surface;
+  border-bottom: 1px solid $color-border;
+
+  &__inner {
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  &__logo {
+    font-family: $font-heading;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+
+    span {
+      display: block;
+      font-family: $font-body;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      font-weight: 400;
+    }
+  }
+
+  &__nav {
+    display: flex;
+    gap: 2rem;
+
+    a {
+      color: $color-muted;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: $color-primary;
+      }
+    }
+  }
+
+  &__contact {
+    padding: 0.8rem 1.2rem;
+    background: $color-primary;
+    color: white;
+    border-radius: 2px;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+}
