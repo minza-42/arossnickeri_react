@@ -1,56 +1,194 @@
-
 @use "./variables" as *;
 
 .header {
-  background: $color-surface;
+  width: 100%;
+  background-color: #ffffff;
   border-bottom: 1px solid $color-border;
 
+  position: relative;
+  z-index: 10;
+
   &__inner {
-    min-height: 80px;
-    display: flex;
+    max-width: $container-width;
+    min-height: 100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    justify-content: space-between;
     gap: 2rem;
   }
 
   &__logo {
-    font-family: $font-heading;
-    font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
+    display: inline-flex;
+    align-items: center;
+    justify-self: start;
+    text-decoration: none;
 
-    span {
+    img {
       display: block;
-      font-family: $font-body;
-      font-size: 0.65rem;
-      letter-spacing: 0.25em;
-      font-weight: 400;
+      width: 145px;
+      height: auto;
+      object-fit: contain;
     }
   }
 
   &__nav {
     display: flex;
-    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
 
     a {
-      color: $color-muted;
+      position: relative;
+      color: $color-text;
+      font-family: $font-body;
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-decoration: none;
       transition: color 0.2s ease;
 
       &:hover {
         color: $color-primary;
       }
+
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -8px;
+        width: 0;
+        height: 2px;
+        background-color: $color-primary;
+        transition: width 0.2s ease;
+      }
+
+      &:hover::after {
+        width: 100%;
+      }
     }
   }
 
   &__contact {
-    padding: 0.8rem 1.2rem;
-    background: $color-primary;
-    color: white;
-    border-radius: 2px;
-    transition: opacity 0.2s ease;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  &__contact-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0.85rem 1.5rem;
+
+    background-color: $color-primary;
+    color: #ffffff !important;
+
+    font-family: $font-body;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+
+    transition:
+      background-color 0.2s ease,
+      transform 0.2s ease;
 
     &:hover {
-      opacity: 0.85;
+      background-color: #a91f2d;
+      transform: translateY(-2px);
+    }
+  }
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .header {
+    &__inner {
+      padding: 0 1.5rem;
+      gap: 1.5rem;
+    }
+
+    &__logo img {
+      width: 125px;
+    }
+
+    &__nav {
+      gap: 1.5rem;
+    }
+
+    &__contact-link {
+      padding: 0.75rem 1rem;
+    }
+  }
+}
+
+/* Mobil */
+@media (max-width: 700px) {
+  .header {
+    &__inner {
+      min-height: auto;
+      padding: 1rem 1.25rem;
+
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+    }
+
+    &__logo {
+      grid-column: 1;
+      grid-row: 1;
+
+      img {
+        width: 115px;
+      }
+    }
+
+    &__contact {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    &__contact-link {
+      padding: 0.7rem 1rem;
+      font-size: 0.85rem;
+    }
+
+    &__nav {
+      grid-column: 1 / -1;
+      grid-row: 2;
+
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+
+      padding-top: 0.5rem;
+
+      a {
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+/* Små mobiler */
+@media (max-width: 400px) {
+  .header {
+    &__inner {
+      padding: 0.85rem;
+    }
+
+    &__logo img {
+      width: 100px;
+    }
+
+    &__nav {
+      gap: 1rem;
+    }
+
+    &__contact-link {
+      padding: 0.65rem 0.8rem;
+      font-size: 0.8rem;
     }
   }
 }

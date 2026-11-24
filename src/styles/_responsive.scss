@@ -3,16 +3,6 @@
 
 // Tablet
 @media (max-width: 900px) {
-  .header {
-    &__inner {
-      gap: 1.5rem;
-    }
-
-    &__nav {
-      gap: 1rem;
-    }
-  }
-
   .hero {
     min-height: 520px;
 
@@ -20,39 +10,18 @@
       padding-block: 5rem;
     }
   }
+
+  .services {
+    padding-block: 5rem;
+
+    &__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
 }
 
 // Mobile
 @media (max-width: 600px) {
-  .header {
-    &__inner {
-      min-height: auto;
-      padding-block: 1.25rem;
-      flex-wrap: wrap;
-      gap: 1.25rem;
-    }
-
-    &__logo {
-      font-size: 1.3rem;
-    }
-
-    &__nav {
-      order: 3;
-      width: 100%;
-      justify-content: space-between;
-      gap: 0.75rem;
-
-      a {
-        font-size: 0.85rem;
-      }
-    }
-
-    &__contact {
-      padding: 0.7rem 0.9rem;
-      font-size: 0.85rem;
-    }
-  }
-
   .hero {
     min-height: auto;
 
@@ -73,20 +42,7 @@
       text-align: center;
     }
   }
-}
 
-
-@media (max-width: 900px) {
-  .services {
-    padding-block: 5rem;
-
-    &__grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-}
-
-@media (max-width: 600px) {
   .services {
     padding-block: 4rem;
 
@@ -107,4 +63,3 @@
     }
   }
 }
-

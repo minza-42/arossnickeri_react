@@ -3,19 +3,19 @@ const services = [
     number: "01",
     title: "Specialsnickeri",
     description:
-      "Skräddarsydda snickerilösningar anpassade efter kundens önskemål och behov.",
+      "Måttanpassade snickerilösningar skapade med omsorg om material, funktion och detaljer.",
   },
   {
     number: "02",
     title: "Möbler & inredning",
     description:
-      "Genomtänkta möbler och inredningsdetaljer med fokus på material och form.",
+      "Specialbyggda möbler och inredning som anpassas efter rummets förutsättningar och kundens önskemål.",
   },
   {
     number: "03",
-    title: "Renovering & montage",
+    title: "Offentliga miljöer",
     description:
-      "Noggrant utförda snickeriarbeten där kvalitet och detaljer står i centrum.",
+      "Snickerier för offentliga och kommersiella miljöer, där hållbarhet och gediget hantverk står i fokus.",
   },
 ];
 
@@ -25,10 +25,12 @@ function Services() {
       <div className="container">
         <div className="services__intro">
           <p className="services__eyebrow">Vad vi gör</p>
+
           <h2>Snickeri med omtanke.</h2>
+
           <p>
-            Från idé till färdigt resultat – vi hjälper dig att skapa lösningar
-            som håller över tid.
+            Från idé till färdigt resultat – vi skapar måttanpassade
+            snickerilösningar med fokus på kvalitet, funktion och hantverk.
           </p>
         </div>
 
