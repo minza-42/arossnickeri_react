@@ -1,5 +1,6 @@
 import { useState, type ChangeEvent, type FormEvent } from "react";
 import { Link } from "react-router-dom";
+
 import phoneIcon from "../assets/icon/phone.svg";
 import mailIcon from "../assets/icon/mail.svg";
 import mapPinIcon from "../assets/icon/map-pin-black.svg";
@@ -9,6 +10,15 @@ type ContactFormData = {
   email: string;
   phone: string;
   message: string;
+};
+
+type SubmitStatus = {
+  type: "success" | "error";
+  message: string;
+};
+
+type ApiResponse = {
+  message?: string;
 };
 
 function ContactPage() {
@@ -21,6 +31,8 @@ function ContactPage() {
 
   const [files, setFiles] = useState<File[]>([]);
   const [fileError, setFileError] = useState("");
+  const [isSending, setIsSending] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<SubmitStatus | null>(null);
 
   const handleInputChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -31,6 +43,8 @@ function ContactPage() {
       ...prev,
       [name]: value,
     }));
+
+    setSubmitStatus(null);
   };
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -39,10 +53,12 @@ function ContactPage() {
     const maxFileSize = 10 * 1024 * 1024;
 
     setFileError("");
+    setSubmitStatus(null);
 
     if (selectedFiles.length > maxFiles) {
       setFileError("Du kan ladda upp högst 5 filer.");
       event.target.value = "";
+      setFiles([]);
       return;
     }
 
@@ -51,17 +67,93 @@ function ContactPage() {
     if (tooLarge) {
       setFileError("Varje fil får vara högst 10 MB.");
       event.target.value = "";
+      setFiles([]);
+      return;
+    }
+
+    const invalidFile = selectedFiles.some(
+      (file) =>
+        !file.type.startsWith("image/") && file.type !== "application/pdf",
+    );
+
+    if (invalidFile) {
+      setFileError("Du kan endast bifoga bilder eller PDF-filer.");
+      event.target.value = "";
+      setFiles([]);
       return;
     }
 
     setFiles(selectedFiles);
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // Formuläret är ännu inte kopplat till en backend.
-    alert("Formuläret är inte kopplat till någon e-posttjänst ännu.");
+    if (isSending) return;
+
+    if (fileError) {
+      setSubmitStatus({
+        type: "error",
+        message: "Kontrollera dina bifogade filer innan du skickar.",
+      });
+      return;
+    }
+
+    setIsSending(true);
+    setSubmitStatus(null);
+
+    try {
+      const data = new FormData();
+
+      data.append("name", formData.name.trim());
+      data.append("email", formData.email.trim());
+      data.append("phone", formData.phone.trim());
+      data.append("message", formData.message.trim());
+
+      files.forEach((file) => {
+        data.append("files[]", file);
+      });
+
+      const response = await fetch("/api/send-mail.php", {
+        method: "POST",
+        body: data,
+      });
+
+      const result = (await response.json()) as ApiResponse;
+
+      if (!response.ok) {
+        throw new Error(result.message || "Kunde inte skicka meddelandet.");
+      }
+
+      setSubmitStatus({
+        type: "success",
+        message:
+          result.message ||
+          "Tack! Ditt meddelande har skickats. Vi återkommer så snart vi kan.",
+      });
+
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        message: "",
+      });
+
+      setFiles([]);
+      setFileError("");
+
+      event.currentTarget.reset();
+    } catch (error) {
+      setSubmitStatus({
+        type: "error",
+        message:
+          error instanceof Error
+            ? error.message
+            : "Något gick fel. Försök igen senare.",
+      });
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
@@ -98,7 +190,6 @@ function ContactPage() {
 
                 <div>
                   <h3>Telefon</h3>
-
                   <a href="tel:018100180">018-100 180</a>
                 </div>
               </div>
@@ -109,7 +200,6 @@ function ContactPage() {
 
                 <div>
                   <h3>E-post</h3>
-
                   <a href="mailto:info@arossnickeri.se">info@arossnickeri.se</a>
                 </div>
               </div>
@@ -120,7 +210,6 @@ function ContactPage() {
 
                 <div>
                   <h3>Besöksadress</h3>
-
                   <p>Anna Fabris gata 12A, 754 54 Uppsala</p>
                 </div>
               </div>
@@ -152,9 +241,7 @@ function ContactPage() {
                     aria-hidden="true"
                   >
                     <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-
                     <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-
                     <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
                   </svg>
 
@@ -182,16 +269,15 @@ function ContactPage() {
                     aria-hidden="true"
                   >
                     <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-
                     <rect x="2" y="9" width="4" height="12" />
-
                     <circle cx="4" cy="4" r="2" />
                   </svg>
 
                   <span>LinkedIn</span>
                 </a>
               </div>
-              {/* Google Maps below the address */}
+
+              {/* Google Maps */}
               <div className="contact-page__map-section">
                 <iframe
                   className="contact-page__map"
@@ -227,6 +313,7 @@ function ContactPage() {
                   value={formData.name}
                   onChange={handleInputChange}
                   placeholder="Ditt namn"
+                  autoComplete="name"
                   required
                 />
               </div>
@@ -244,6 +331,7 @@ function ContactPage() {
                   value={formData.email}
                   onChange={handleInputChange}
                   placeholder="din@email.se"
+                  autoComplete="email"
                   required
                 />
               </div>
@@ -259,6 +347,7 @@ function ContactPage() {
                   value={formData.phone}
                   onChange={handleInputChange}
                   placeholder="Ditt telefonnummer"
+                  autoComplete="tel"
                 />
               </div>
 
@@ -295,7 +384,9 @@ function ContactPage() {
                 <small>Max 5 filer. Varje fil får vara högst 10 MB.</small>
 
                 {fileError && (
-                  <p className="contact-form__error">{fileError}</p>
+                  <p className="contact-form__error" role="alert">
+                    {fileError}
+                  </p>
                 )}
 
                 {files.length > 0 && (
@@ -311,15 +402,28 @@ function ContactPage() {
               <p className="contact-form__required">* Obligatoriska fält</p>
 
               {/* Submit */}
-              <button type="submit" className="contact-form__submit">
-                Skicka meddelande
+              <button
+                type="submit"
+                className="contact-form__submit"
+                disabled={isSending}
+              >
+                {isSending ? "Skickar..." : "Skicka meddelande"}
               </button>
 
-              {/* Privacy information */}
+              {/* Submission status */}
+              {submitStatus && (
+                <p
+                  className={`contact-form__status contact-form__status--${submitStatus.type}`}
+                  role="status"
+                >
+                  {submitStatus.message}
+                </p>
+              )}
 
+              {/* Privacy information */}
               <p className="contact-form__privacy">
-                Vi sparar och behandlar dina kontaktuppgifter för att kunna
-                besvara din förfrågan. Läs mer i vår{" "}
+                Vi behandlar dina kontaktuppgifter för att kunna besvara din
+                förfrågan. Läs mer i vår{" "}
                 <Link to="/integritetspolicy">integritetspolicy</Link>.
               </p>
             </form>
