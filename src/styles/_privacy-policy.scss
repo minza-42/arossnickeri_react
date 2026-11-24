@@ -1,0 +1,53 @@
+@use "./variables" as *;
+
+.privacy-policy {
+  padding: 5rem 2rem;
+
+  &__container {
+    max-width: 900px;
+    margin: 0 auto;
+
+    h1 {
+      margin-bottom: 2rem;
+    }
+
+    section {
+      margin-top: 2.5rem;
+    }
+
+    h2 {
+      margin-bottom: 1rem;
+    }
+
+    p,
+    li {
+      line-height: 1.8;
+    }
+
+    ul {
+      padding-left: 1.5rem;
+    }
+
+    a {
+      color: $color-primary;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+
+      &:hover {
+        opacity: 0.75;
+      }
+    }
+
+    address {
+      margin-top: 1rem;
+      font-style: normal;
+      line-height: 1.8;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .privacy-policy {
+    padding: 3rem 1.25rem;
+  }
+}

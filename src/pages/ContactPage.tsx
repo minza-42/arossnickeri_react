@@ -1,5 +1,5 @@
 import { useState, type ChangeEvent, type FormEvent } from "react";
-
+import { Link } from "react-router-dom";
 import phoneIcon from "../assets/icon/phone.svg";
 import mailIcon from "../assets/icon/mail.svg";
 import mapPinIcon from "../assets/icon/map-pin-black.svg";
@@ -316,9 +316,11 @@ function ContactPage() {
               </button>
 
               {/* Privacy information */}
+
               <p className="contact-form__privacy">
-                Genom att skicka formuläret godkänner du att vi behandlar dina
-                uppgifter för att kunna besvara din förfrågan.
+                Vi sparar och behandlar dina kontaktuppgifter för att kunna
+                besvara din förfrågan. Läs mer i vår{" "}
+                <Link to="/integritetspolicy">integritetspolicy</Link>.
               </p>
             </form>
           </section>
