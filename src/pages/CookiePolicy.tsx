@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import "../styles/_cookie-policy.scss";
+import Footer from "../components/Footer";
 
 function CookiePolicy() {
   return (
@@ -100,6 +101,7 @@ function CookiePolicy() {
           Senast uppdaterad: 24 november 2026
         </p>
       </div>
+      <Footer />
     </main>
   );
 }

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import "../styles/_privacy-policy.scss";
+import Footer from "../components/Footer";
 
 function PrivacyPolicy() {
   return (
@@ -130,6 +131,7 @@ function PrivacyPolicy() {
           </address>
         </section>
       </div>
+      <Footer />
     </main>
   );
 }

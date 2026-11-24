@@ -1,4 +1,5 @@
 import buildingImage from "../assets/images/snickeri-lokal.webp";
+import Footer from "../components/Footer";
 
 function AboutPage() {
   return (
@@ -51,8 +52,7 @@ function AboutPage() {
       {/* History */}
       <section className="about-section">
         <div className="about-section__content">
-          <h2>Aros historia</h2>
-
+          <h2 className="about-section__history-title">Aros historia</h2>
           <p>
             I början av 1990-talet kände entreprenören Martin Karlsson att det
             saknades en aktör bland specialsnickerierna i Uppsalaregionen.
@@ -95,6 +95,7 @@ function AboutPage() {
           </p>
         </div>
       </section>
+      <Footer />
     </main>
   );
 }

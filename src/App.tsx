@@ -6,6 +6,7 @@ import AboutPage from "./pages/AboutPage";
 import GalleryPage from "./pages/GalleryPage";
 import NotFound from "./pages/NotFound";
 import ContactPage from "./pages/ContactPage";
+import Footer from "./components/Footer";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import CookiePolicy from "./pages/CookiePolicy";
 
@@ -21,6 +22,7 @@ function App() {
         <Route path="/kontakt" element={<ContactPage />} />
         <Route path="/cookiepolicy" element={<CookiePolicy />} />
         <Route path="/integritetspolicy" element={<PrivacyPolicy />} />
+        <Route path="/footer" element={<Footer />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

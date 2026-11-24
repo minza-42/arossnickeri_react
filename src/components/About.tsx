@@ -17,8 +17,8 @@ function About() {
             lösningar som är anpassade efter varje kund och miljö.
           </p>
 
-          <a href="#kontakt" className="about__button">
-            Kontakta oss
+          <a href="/om-oss" className="about__button">
+            Om Oss
           </a>
         </div>
       </div>

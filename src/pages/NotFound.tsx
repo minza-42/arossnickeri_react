@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import "../styles/_not-found.scss";
+import Footer from "../components/Footer";
 
 function NotFound() {
   return (
@@ -15,6 +16,7 @@ function NotFound() {
           Tillbaka till startsidan
         </Link>
       </div>
+      <Footer />
     </main>
   );
 }

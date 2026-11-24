@@ -1,9 +1,10 @@
 import { useState, type ChangeEvent, type FormEvent } from "react";
 import { Link } from "react-router-dom";
 
-import phoneIcon from "../assets/icon/phone.svg";
-import mailIcon from "../assets/icon/mail.svg";
-import mapPinIcon from "../assets/icon/map-pin-black.svg";
+import phoneIcon from "../assets/icons/phone.svg";
+import mailIcon from "../assets/icons/mail.svg";
+import mapPinIcon from "../assets/icons/map-pin-black.svg";
+import Footer from "../components/Footer";
 
 type ContactFormData = {
   name: string;
@@ -430,6 +431,7 @@ function ContactPage() {
           </section>
         </div>
       </div>
+      <Footer />
     </main>
   );
 }

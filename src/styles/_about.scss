@@ -1,8 +1,9 @@
 @use "./variables" as *;
 
 .about {
-  padding: 7rem 0;
+  padding: 2rem 0;
   background-color: $color-surface;
+  margin-bottom: 4rem;
 
   &__content {
     max-width: 900px;
