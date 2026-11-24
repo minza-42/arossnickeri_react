@@ -1,32 +1,59 @@
-import logo from "../assets/logo/aros-snickeri.webp";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import logo from "../assets/logo/aros-snickeri.webp";
 
 function Header() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
+
   return (
     <header className="header">
       <div className="header__inner">
-        <Link to="/" className="header__logo">
+        {/* LOGO */}
+        <Link to="/" className="header__logo" onClick={closeMenu}>
           <img src={logo} alt="Aros Snickeri" />
         </Link>
 
-        <nav className="header__nav">
-          <Link to="/om-oss">Om oss</Link>
-          <Link to="/#tjanster">Vad vi gör</Link>
-          <Link to="/galleri">Galleri</Link>
-          <Link to="/kontakt" className="header__contact-button">
+        {/* MOBILE MENU BUTTON */}
+        <button
+          className="header__menu-toggle"
+          type="button"
+          aria-label={menuOpen ? "Stäng meny" : "Öppna meny"}
+          aria-expanded={menuOpen}
+          aria-controls="main-navigation"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          <span>{menuOpen ? "×" : "☰"}</span>
+        </button>
+
+        {/* NAVIGATION */}
+        <nav
+          id="main-navigation"
+          className={`header__nav ${menuOpen ? "header__nav--open" : ""}`}
+        >
+          <Link to="/om-oss" onClick={closeMenu}>
+            Om oss
+          </Link>
+
+          <Link to="/#tjanster" onClick={closeMenu}>
+            Vad vi gör
+          </Link>
+
+          <Link to="/galleri" onClick={closeMenu}>
+            Galleri
+          </Link>
+
+          <Link
+            to="/kontakt"
+            className="header__contact-button"
+            onClick={closeMenu}
+          >
             Kontakta oss
           </Link>
         </nav>
-
-        <div className="header__contact">
-          <a href="tel:018100180">
-            <strong>018-100 180</strong>
-          </a>
-
-          <a href="mailto:info@arossnickeri.se">
-            <strong>info@arossnickeri.se</strong>
-          </a>
-        </div>
       </div>
     </header>
   );
