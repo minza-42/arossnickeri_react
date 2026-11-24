@@ -45,19 +45,22 @@
 }
 
 .service-card {
-  padding: 2rem 2rem 2.5rem 0;
+  min-width: 0;
+  padding: 2rem;
 
-  &:not(:last-child) {
+  // Lodräta linjer mellan kolumnerna
+  &:not(:nth-child(3n)) {
     border-right: 1px solid $color-border;
   }
 
-  &:not(:first-child) {
-    padding-left: 2rem;
+  // Vågrät linje mellan första och andra raden
+  &:nth-child(n + 4) {
+    border-top: 1px solid $color-border;
   }
 
   &__number {
     display: block;
-    margin-bottom: 3rem;
+    margin-bottom: 2.5rem;
     color: $color-primary;
     font-size: 0.85rem;
     font-weight: 500;
@@ -88,26 +91,37 @@
     &__intro {
       margin-bottom: 2.5rem;
     }
-
-    &__grid {
-      grid-template-columns: 1fr;
-    }
   }
 
   .service-card {
     padding: 1.75rem 0;
 
-    &:not(:last-child) {
+    &:not(:nth-child(3n)) {
       border-right: none;
-      border-bottom: 1px solid $color-border;
     }
 
-    &:not(:first-child) {
-      padding-left: 0;
+    &:nth-child(n + 4) {
+      border-top: none;
+    }
+
+    &:not(:last-child) {
+      border-bottom: 1px solid $color-border;
     }
 
     &__number {
       margin-bottom: 1.5rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .services {
+    padding: 3.5rem 0;
+  }
+
+  .service-card {
+    h3 {
+      font-size: 1.3rem;
     }
   }
 }

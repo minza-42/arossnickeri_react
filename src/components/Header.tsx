@@ -11,7 +11,7 @@ function Header() {
         <nav className="header__nav">
           <a href="#om-oss">Om oss</a>
           <a href="#tjanster">Vad vi gör</a>
-          <a href="#referenser">Referenser</a>
+          <a href="#referenser">Galleri</a>
         </nav>
 
         <div className="header__contact">
