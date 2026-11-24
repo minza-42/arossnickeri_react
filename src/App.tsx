@@ -1,12 +1,23 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import Header from "./components/Header";
 import Home from "./pages/Home";
+import AboutPage from "./pages/AboutPage";
+import GalleryPage from "./pages/GalleryPage";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
-    <div className="app">
+    <BrowserRouter>
       <Header />
-      <Home />
-    </div>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/om-oss" element={<AboutPage />} />
+        <Route path="/galleri" element={<GalleryPage />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

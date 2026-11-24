@@ -1,23 +1,24 @@
 import logo from "../assets/logo/aros-snickeri.webp";
+import { Link } from "react-router-dom";
 
 function Header() {
   return (
     <header className="header">
       <div className="header__inner">
-        <a href="/" className="header__logo">
+        <Link to="/" className="header__logo">
           <img src={logo} alt="Aros Snickeri" />
-        </a>
+        </Link>
 
         <nav className="header__nav">
-          <a href="#om-oss">Om oss</a>
-          <a href="#tjanster">Vad vi gör</a>
-          <a href="#referenser">Galleri</a>
+          <Link to="/om-oss">Om oss</Link>
+          <Link to="/#tjanster">Vad vi gör</Link>
+          <Link to="/galleri">Galleri</Link>
         </nav>
 
         <div className="header__contact">
-          <a href="#kontakt" className="header__contact-link">
+          <Link to="/#kontakt" className="header__contact-link">
             Kontakta oss
-          </a>
+          </Link>
         </div>
       </div>
     </header>
